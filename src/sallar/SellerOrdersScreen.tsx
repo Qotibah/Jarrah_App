@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation'; // تأكد أن المسار صحيح
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'SellerOrders'>;
+const navigation = useNavigation<NavigationProp>();
 
 type Order = {
   id: string;
@@ -29,7 +34,6 @@ const mockOrders: Order[] = [
 
 const SellerOrdersScreen = () => {
   const [orders, setOrders] = useState<Order[]>(mockOrders);
-  const navigation = useNavigation();
 
   const handleAccept = (orderId: string) => {
     setOrders(prev => prev.filter(order => order.id !== orderId));
