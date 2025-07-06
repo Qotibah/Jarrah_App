@@ -1,6 +1,6 @@
-// src/seller/SellerOrdersScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 type Order = {
   id: string;
@@ -29,6 +29,7 @@ const mockOrders: Order[] = [
 
 const SellerOrdersScreen = () => {
   const [orders, setOrders] = useState<Order[]>(mockOrders);
+  const navigation = useNavigation();
 
   const handleAccept = (orderId: string) => {
     setOrders(prev => prev.filter(order => order.id !== orderId));
@@ -50,11 +51,25 @@ const SellerOrdersScreen = () => {
       </Text>
 
       <View style={styles.actions}>
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#27ae60' }]} onPress={() => handleAccept(item.id)}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#27ae60' }]}
+          onPress={() => handleAccept(item.id)}
+        >
           <Text style={styles.buttonText}>قبول</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#c0392b' }]} onPress={() => handleReject(item.id)}>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#c0392b' }]}
+          onPress={() => handleReject(item.id)}
+        >
           <Text style={styles.buttonText}>رفض</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: '#2980b9' }]}
+          onPress={() => navigation.navigate('SellerOrderDetails', { order: item })}
+        >
+          <Text style={styles.buttonText}>تفاصيل</Text>
         </TouchableOpacity>
       </View>
     </View>
