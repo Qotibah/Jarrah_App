@@ -5,7 +5,7 @@ import RoleSelectionScreen from './src/screens/RoleSelectionScreen';
 import BuyerLoginScreen from './src/buyer/BuyerLoginScreen';
 import BuyerOrderScreen from './src/buyer/BuyerOrderScreen';
 import { RootStackParamList } from './src/types/navigation';
-
+import SellerOrdersScreen from './src/sallar/SellerOrdersScreen';
 import MapPickerScreen from './src/buyer/MapPickerScreen'; 
 import SellerLoginScreen from './src/sallar/SellerLoginScreen'; // تأكد من وجود هذا المسار
 
@@ -22,7 +22,7 @@ export default function App() {
         <Stack.Screen name="BuyerOrder" component={BuyerOrderScreen} />
          <Stack.Screen name="MapPicker" component={MapPickerScreen} />
         <Stack.Screen name="SellerLogin" component={SellerLoginScreen} />
-
+        <Stack.Screen name="SellerOrders" component={SellerOrdersScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
