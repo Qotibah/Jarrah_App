@@ -16,7 +16,7 @@ const SellerLoginScreen = () => {
       return;
     }
 
-    // You can add logic to verify the seller here
+    // التنقل بدون تمرير بيانات
     navigation.navigate('SellerOrders');
   };
 

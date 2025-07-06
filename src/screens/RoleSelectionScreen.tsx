@@ -1,66 +1,63 @@
-// src/buyer/BuyerLoginScreen.tsx
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation'; // تأكد من وجود هذا الملف
+import { RootStackParamList } from '../types/navigation';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'BuyerLogin'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'RoleSelection'>;
 
-const BuyerLoginScreen = () => {
+const RoleScreen = () => {
   const navigation = useNavigation<NavigationProp>();
-  const [phone, setPhone] = useState('');
-
-  const handleLogin = () => {
-    if (phone.trim().length < 9) {
-      Alert.alert('خطأ', 'يرجى إدخال رقم هاتف صالح');
-      return;
-    }
-
-    // التنقل مع إرسال رقم الهاتف
-    navigation.navigate('BuyerOrder', { phone });
-  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>تسجيل الدخول كمشتري</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="أدخل رقم هاتفك"
-        placeholderTextColor="#999"
-        keyboardType="phone-pad"
-        value={phone}
-        onChangeText={setPhone}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>دخول</Text>
+      <Text style={styles.title}>أهلاً بك في تطبيق جرة</Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('BuyerLogin')}
+      >
+        <Text style={styles.buttonText}>أنا مشتري</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: '#27ae60' }]}
+        onPress={() => navigation.navigate('SellerLogin')}
+      >
+        <Text style={styles.buttonText}>أنا بائع</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default BuyerLoginScreen;
+export default RoleScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#111', padding: 20 },
-  title: { fontSize: 24, color: '#fff', marginBottom: 30 },
-  input: {
-    width: '100%',
-    padding: 15,
-    borderWidth: 1,
-    borderColor: '#555',
-    borderRadius: 10,
-    marginBottom: 20,
+  container: {
+    flex: 1,
+    backgroundColor: '#111',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 26,
     color: '#fff',
-    backgroundColor: '#222',
+    marginBottom: 40,
+    fontWeight: 'bold',
   },
   button: {
     backgroundColor: '#f39c12',
     paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 10,
+    paddingHorizontal: 40,
+    borderRadius: 12,
+    marginVertical: 10,
     width: '100%',
     alignItems: 'center',
   },
-  buttonText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  buttonText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
