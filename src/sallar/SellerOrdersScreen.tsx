@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation'; // تأكد أن الملف موجود
 
 type Order = {
   id: string;
@@ -10,26 +12,27 @@ type Order = {
   location: { latitude: number; longitude: number };
 };
 
-const mockOrders: Order[] = [
-  {
-    id: '1',
-    phone: '0799999999',
-    quantity: 2,
-    installation: true,
-    location: { latitude: 31.963158, longitude: 35.930359 },
-  },
-  {
-    id: '2',
-    phone: '0788888888',
-    quantity: 1,
-    installation: false,
-    location: { latitude: 31.97, longitude: 35.92 },
-  },
-];
-
+// تعريف نوع التنقل
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'SellerOrders'>;
 const SellerOrdersScreen = () => {
-  const [orders, setOrders] = useState<Order[]>(mockOrders);
-  const navigation = useNavigation();
+  const [orders, setOrders] = useState<Order[]>([
+    {
+      id: '1',
+      phone: '0799999999',
+      quantity: 2,
+      installation: true,
+      location: { latitude: 31.963158, longitude: 35.930359 },
+    },
+    {
+      id: '2',
+      phone: '0788888888',
+      quantity: 1,
+      installation: false,
+      location: { latitude: 31.97, longitude: 35.92 },
+    },
+  ]);
+
+  const navigation = useNavigation<NavigationProp>();
 
   const handleAccept = (orderId: string) => {
     setOrders(prev => prev.filter(order => order.id !== orderId));
