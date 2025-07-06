@@ -1,8 +1,11 @@
+// src/seller/SellerOrdersScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation'; // تأكد أن الملف موجود
+import { RootStackParamList } from '../types/navigation';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'SellerOrders'>;
 
 type Order = {
   id: string;
@@ -12,9 +15,8 @@ type Order = {
   location: { latitude: number; longitude: number };
 };
 
-// تعريف نوع التنقل
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'SellerOrders'>;
 const SellerOrdersScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
   const [orders, setOrders] = useState<Order[]>([
     {
       id: '1',
@@ -31,8 +33,6 @@ const SellerOrdersScreen = () => {
       location: { latitude: 31.97, longitude: 35.92 },
     },
   ]);
-
-  const navigation = useNavigation<NavigationProp>();
 
   const handleAccept = (orderId: string) => {
     setOrders(prev => prev.filter(order => order.id !== orderId));

@@ -10,8 +10,8 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'BuyerOrder'
 type BuyerOrderRouteProp = RouteProp<RootStackParamList, 'BuyerOrder'>;
 
 const BuyerOrderScreen = () => {
-  const route = useRoute<BuyerOrderRouteProp>();
   const navigation = useNavigation<NavigationProp>();
+  const route = useRoute<BuyerOrderRouteProp>();
   const phoneFromLogin = route.params.phone;
   const locationFromMap = route.params.location;
 
@@ -94,7 +94,7 @@ const BuyerOrderScreen = () => {
 
         <TouchableOpacity
           style={[styles.locationButton, { backgroundColor: '#8e44ad' }]}
-          onPress={() => navigation.navigate('MapPicker')}
+          onPress={() => navigation.navigate('MapPicker', { phone })}
         >
           <Text style={styles.buttonText}>🗺️ اختيار على الخريطة</Text>
         </TouchableOpacity>
@@ -115,33 +115,31 @@ const BuyerOrderScreen = () => {
 };
 
 export default BuyerOrderScreen;
-
-// ... نفس styles اللي عندك بالضبط
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f0e6ff', // خلفية بنفسجية فاتحة جداً
+    backgroundColor: '#f0e6ff',
   },
   title: {
     fontSize: 28,
     fontWeight: '900',
     marginBottom: 25,
     textAlign: 'center',
-    color: '#6a1b9a', // بنفسجي غامق
-    textShadowColor: 'rgba(255, 165, 0, 0.8)', // ظل برتقالي
+    color: '#6a1b9a',
+    textShadowColor: 'rgba(255, 165, 0, 0.8)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 8,
   },
   label: {
     fontSize: 18,
     marginBottom: 12,
-    color: '#4a148c', // بنفسجي قوي
+    color: '#4a148c',
     fontWeight: '600',
   },
   input: {
     height: 50,
-    borderColor: '#ff9800', // برتقالي
+    borderColor: '#ff9800',
     borderWidth: 2,
     borderRadius: 15,
     paddingHorizontal: 18,
@@ -160,12 +158,12 @@ const styles = StyleSheet.create({
   counterButton: {
     width: 50,
     height: 50,
-    backgroundColor: '#8e24aa', // بنفسجي قوي
+    backgroundColor: '#8e24aa',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
     marginHorizontal: 15,
-    shadowColor: '#ff9800', // ظل برتقالي
+    shadowColor: '#ff9800',
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.6,
     shadowRadius: 10,
@@ -183,13 +181,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   locationButton: {
-    backgroundColor: '#ff9800', // برتقالي
+    backgroundColor: '#ff9800',
     paddingVertical: 16,
     paddingHorizontal: 22,
     borderRadius: 15,
     alignItems: 'center',
     marginBottom: 15,
-    shadowColor: '#6a1b9a', // ظل بنفسجي
+    shadowColor: '#6a1b9a',
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.6,
     shadowRadius: 10,
@@ -215,11 +213,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: '#6a1b9a', // بنفسجي قوي
+    backgroundColor: '#6a1b9a',
     paddingVertical: 18,
     borderRadius: 25,
     alignItems: 'center',
-    shadowColor: '#ff9800', // ظل برتقالي
+    shadowColor: '#ff9800',
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.8,
     shadowRadius: 12,
